@@ -1,5 +1,6 @@
 package com.ebohost.hotelservice.service;
 
+import com.ebohost.hotelservice.dto.HotelRequest;
 import com.ebohost.hotelservice.entity.Hotel;
 import com.ebohost.hotelservice.repository.HotelRepository;
 import org.springframework.stereotype.Service;
@@ -38,12 +39,42 @@ public class HotelServiceImpl implements HotelService{
     }
 
     @Override
-    public Hotel save(Hotel hotel) {
-        return hotelRepository.save(hotel);
+    public Hotel save(HotelRequest hotelRequest) {
+
+        Hotel tempHotel = new Hotel();
+
+        tempHotel.setName(hotelRequest.getName());
+        tempHotel.setDescription(hotelRequest.getDescription());
+        tempHotel.setAddress(hotelRequest.getAddress());
+        tempHotel.setCity(hotelRequest.getCity());
+        tempHotel.setCountry(hotelRequest.getCountry());
+        tempHotel.setPostalCode(hotelRequest.getPostalCode());
+        tempHotel.setPhone(hotelRequest.getPhone());
+        tempHotel.setEmail(hotelRequest.getEmail());
+
+        return hotelRepository.save(tempHotel);
+    }
+
+    @Override
+    public Hotel update(int id, HotelRequest hotelRequest) {
+
+        Hotel tempHotel = findById(id);
+
+        tempHotel.setName(hotelRequest.getName());
+        tempHotel.setDescription(hotelRequest.getDescription());
+        tempHotel.setAddress(hotelRequest.getAddress());
+        tempHotel.setCity(hotelRequest.getCity());
+        tempHotel.setCountry(hotelRequest.getCountry());
+        tempHotel.setPostalCode(hotelRequest.getPostalCode());
+        tempHotel.setPhone(hotelRequest.getPhone());
+        tempHotel.setEmail(hotelRequest.getEmail());
+
+        return hotelRepository.save(tempHotel);
     }
 
     @Override
     public void deleteById(int id) {
+        findById(id);
         hotelRepository.deleteById(id);
     }
 }

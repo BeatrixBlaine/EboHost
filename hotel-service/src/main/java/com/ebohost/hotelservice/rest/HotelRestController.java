@@ -1,10 +1,10 @@
 package com.ebohost.hotelservice.rest;
 
+import com.ebohost.hotelservice.dto.HotelRequest;
 import com.ebohost.hotelservice.entity.Hotel;
 import com.ebohost.hotelservice.service.HotelService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +21,28 @@ public class HotelRestController {
     @GetMapping("/hotels")
     public List<Hotel> getHotels() {
         return hotelService.findAll();
+    }
+
+    @GetMapping("/hotels/{hotelId}")
+    public Hotel getHotel(@PathVariable int hotelId) {
+        return hotelService.findById(hotelId);
+    }
+
+    @PostMapping("/hotels")
+    public Hotel addHotel(@Valid @RequestBody HotelRequest hotelRequest) {
+        return hotelService.save(hotelRequest);
+    }
+
+    @PutMapping("/hotels/{hotelId}")
+    public Hotel updateHotel(@PathVariable int hotelId,
+                             @Valid @RequestBody HotelRequest hotelRequest) {
+        return hotelService.update(hotelId, hotelRequest);
+    }
+
+    @DeleteMapping("/hotels/{hotelId}")
+    public String deleteHotel(@PathVariable int hotelId) {
+        hotelService.deleteById(hotelId);
+        return "Hotel deleted with id - " + hotelId;
     }
 
 }

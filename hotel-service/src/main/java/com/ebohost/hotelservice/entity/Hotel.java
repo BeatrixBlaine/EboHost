@@ -9,7 +9,7 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hotel_id")
-    private Long id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -48,11 +48,11 @@ public class Hotel {
 
     public Hotel(){}
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
