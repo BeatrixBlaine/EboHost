@@ -1,4 +1,4 @@
-package com.ebo_host.hotel_service;
+package com.ebohost.hotelservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HotelServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HotelServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HotelServiceApplication.class, args);
+    }
 
 }
