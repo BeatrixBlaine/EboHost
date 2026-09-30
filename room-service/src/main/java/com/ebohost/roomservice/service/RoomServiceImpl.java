@@ -3,9 +3,11 @@ package com.ebohost.roomservice.service;
 import com.ebohost.roomservice.dto.RoomRequest;
 import com.ebohost.roomservice.entity.Room;
 import com.ebohost.roomservice.repository.RoomRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RoomServiceImpl implements RoomService{
 
     private final RoomRepository roomRepository;
