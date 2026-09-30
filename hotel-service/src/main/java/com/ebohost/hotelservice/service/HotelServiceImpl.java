@@ -2,6 +2,7 @@ package com.ebohost.hotelservice.service;
 
 import com.ebohost.hotelservice.dto.HotelRequest;
 import com.ebohost.hotelservice.entity.Hotel;
+import com.ebohost.hotelservice.exception.HotelNotFoundException;
 import com.ebohost.hotelservice.repository.HotelRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class HotelServiceImpl implements HotelService{
         if(tempHotel.isPresent()) {
             theHotel = tempHotel.get();
         } else {
-            throw new RuntimeException("Hotel not found - " + id);
+            throw new HotelNotFoundException("Hotel not found with id: " + id);
         }
 
         return theHotel;
