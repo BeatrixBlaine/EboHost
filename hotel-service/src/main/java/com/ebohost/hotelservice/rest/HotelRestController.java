@@ -42,7 +42,7 @@ public class HotelRestController {
     @DeleteMapping("/hotels/{hotelId}")
     public String deleteHotel(@PathVariable int hotelId) {
         hotelService.deleteById(hotelId);
-        return "Hotel deleted with id - " + hotelId;
+        return "Hotel deleted with id: " + hotelId;
     }
 
 }
