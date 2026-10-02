@@ -5,7 +5,14 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "availability")
+@Table(
+        name = "availability",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_room_date",
+                        columnNames = {"room_id", "date"}
+                )
+        })
 public class Availability {
 
     @Id
