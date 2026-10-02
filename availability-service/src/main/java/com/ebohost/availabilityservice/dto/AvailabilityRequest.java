@@ -2,7 +2,7 @@ package com.ebohost.availabilityservice.dto;
 
 import com.ebohost.availabilityservice.entity.AvailabilityStatus;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -11,10 +11,10 @@ public class AvailabilityRequest {
     @Min(value = 1, message = "Hotel ID must be greater than 0")
     private int roomId;
 
-    @NotBlank(message = "Date is required")
+    @NotNull(message = "Date is required")
     private LocalDate date;
 
-    @NotBlank(message = "Status is required")
+    @NotNull(message = "Status is required")
     private AvailabilityStatus status;
 
     public @Min(value = 1, message = "Hotel ID must be greater than 0") int getRoomId() {
@@ -25,19 +25,19 @@ public class AvailabilityRequest {
         this.roomId = roomId;
     }
 
-    public @NotBlank(message = "Date is required") LocalDate getDate() {
+    public @NotNull(message = "Date is required") LocalDate getDate() {
         return date;
     }
 
-    public void setDate(@NotBlank(message = "Date is required") LocalDate date) {
+    public void setDate(@NotNull(message = "Date is required") LocalDate date) {
         this.date = date;
     }
 
-    public @NotBlank(message = "Status is required") AvailabilityStatus getStatus() {
+    public @NotNull(message = "Status is required") AvailabilityStatus getStatus() {
         return status;
     }
 
-    public void setStatus(@NotBlank(message = "Status is required") AvailabilityStatus status) {
+    public void setStatus(@NotNull(message = "Status is required") AvailabilityStatus status) {
         this.status = status;
     }
 }
