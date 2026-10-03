@@ -1,14 +1,15 @@
 package com.ebohost.roomservice.service;
 
+import com.ebohost.roomservice.client.HotelClient;
 import com.ebohost.roomservice.dto.RoomRequest;
 import com.ebohost.roomservice.entity.Room;
 import com.ebohost.roomservice.exception.HotelNotFoundException;
 import com.ebohost.roomservice.exception.RoomNotFoundException;
 import com.ebohost.roomservice.repository.RoomRepository;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,20 +19,21 @@ public class RoomServiceImpl implements RoomService{
 
     private final RoomRepository roomRepository;
     private final RestClient restClient;
+    private final HotelClient hotelClient;
 
     @Autowired
-    public RoomServiceImpl(RoomRepository roomRepository, RestClient restClient) {
+    public RoomServiceImpl(RoomRepository roomRepository,
+                           RestClient restClient,
+                           HotelClient hotelClient) {
         this.roomRepository = roomRepository;
         this.restClient = restClient;
+        this.hotelClient = hotelClient;
     }
 
     private void validateHotel(int hotelId) {
         try {
-            restClient.get()
-                    .uri("http://localhost:8081/api/hotels/" + hotelId)
-                    .retrieve()
-                    .toBodilessEntity();
-        } catch (HttpClientErrorException.NotFound e) {
+            hotelClient.getHotel(hotelId);
+        } catch (FeignException.NotFound e) {
             throw new HotelNotFoundException(
                     "Hotel with ID " + hotelId + " does not exist"
             );
